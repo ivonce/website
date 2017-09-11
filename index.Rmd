@@ -5,14 +5,19 @@ output: html_document
 
 ## Filtering Columns and Rows
 
+
 with SQL, you can filter columns with SELECT and rows with WHERE. Let's try an example with Lahman baseball database. First we need to load the appropriate packages. 
+
 
 ```{r warning=FALSE, message=FALSE}
 library(Lahman)
 library (sqldf)
 ```
 
+***
+
 Now, suppose we would like to see homerun totals for the 1927 Yankees. We could write the following:
+
 
 ```{r}
 query<-"SELECT playerID, yearID, teamID, HR FROM Batting
@@ -20,3 +25,57 @@ WHERE teamID='NYA' and yearID=1927"
 sqldf(query)
 ```
 
+***
+
+Now, we can list all players from Yankees that have scored at least 40 homeruns:
+
+
+```{r}
+query<-"SELECT playerID,teamID,yearID,HR FROM Batting WHERE teamID='NYA' and HR>=40"
+sqldf(query)
+```
+
+***
+
+We can also see those players who had 40 homeruns but didn't have more than 60 strikeouts:
+
+
+```{r}
+query<-"SELECT playerID,teamID,yearID,HR,SO FROM Batting WHERE HR>40 and SO<60"
+sqldf(query)
+```
+
+***
+
+Here is the information from 1970's for Phillies for all players who had more than 30 homeruns:
+
+
+```{r}
+query<-"SELECT playerID, teamID,yearID,HR FROM Batting WHERE yearID>=1970 and yearID<1980 and HR>30 and teamID='PHI'"
+sqldf(query)
+```
+
+***
+
+We can also arrange them by descending number homeruns: 
+
+
+```{r}
+query<-"SELECT playerID,teamID,yearID,HR FROM Batting WHERE HR>50
+ORDER BY HR DESC"
+sqldf(query)
+```
+
+***
+
+This is the list of players that had at least 400 at bats but had less than 10 strikeouts and it is arranged by the least amount of strikeouts
+
+
+```{r}
+query<-"SELECT playerID,teamID,yearID,SO,AB FROM Batting 
+WHERE SO<10 and AB>=400
+ORDER BY SO"
+sqldf(query)
+```
+
+***
