@@ -14,7 +14,9 @@ library(Lahman)
 library (sqldf)
 ```
 
-***
+#______________________________________________________________________________
+
+####Example 1
 
 Now, suppose we would like to see homerun totals for the 1927 Yankees. We could write the following:
 
@@ -25,7 +27,9 @@ WHERE teamID='NYA' and yearID=1927"
 sqldf(query)
 ```
 
-***
+#___________________________________________________________________________________
+
+####Example 2
 
 Now, we can list all players from Yankees that have scored at least 40 homeruns:
 
@@ -35,7 +39,9 @@ query<-"SELECT playerID,teamID,yearID,HR FROM Batting WHERE teamID='NYA' and HR>
 sqldf(query)
 ```
 
-***
+#___________________________________________________________________________________
+
+####Example 3
 
 We can also see those players who had 40 homeruns but didn't have more than 60 strikeouts:
 
@@ -45,7 +51,9 @@ query<-"SELECT playerID,teamID,yearID,HR,SO FROM Batting WHERE HR>40 and SO<60"
 sqldf(query)
 ```
 
-***
+#___________________________________________________________________________________
+
+####Example 4
 
 Here is the information from 1970's for Phillies for all players who had more than 30 homeruns:
 
@@ -55,7 +63,11 @@ query<-"SELECT playerID, teamID,yearID,HR FROM Batting WHERE yearID>=1970 and ye
 sqldf(query)
 ```
 
-***
+#___________________________________________________________________________________
+
+
+###Order By
+####Example 1
 
 We can also arrange them by descending number homeruns: 
 
@@ -66,7 +78,9 @@ ORDER BY HR DESC"
 sqldf(query)
 ```
 
-***
+#___________________________________________________________________________________
+
+####Example 2
 
 This is the list of players that had at least 400 at bats but had less than 10 strikeouts and it is arranged by the least amount of strikeouts
 
@@ -78,4 +92,5 @@ ORDER BY SO"
 sqldf(query)
 ```
 
-***
+#___________________________________________________________________________________
+

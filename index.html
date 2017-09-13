@@ -125,7 +125,11 @@ $(document).ready(function () {
 <p>with SQL, you can filter columns with SELECT and rows with WHERE. Let’s try an example with Lahman baseball database. First we need to load the appropriate packages.</p>
 <pre class="r"><code>library(Lahman)
 library (sqldf)</code></pre>
-<hr />
+</div>
+<div id="section" class="section level1">
+<h1>______________________________________________________________________________</h1>
+<div id="example-1" class="section level4">
+<h4>Example 1</h4>
 <p>Now, suppose we would like to see homerun totals for the 1927 Yankees. We could write the following:</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID, yearID, teamID, HR FROM Batting
 WHERE teamID='NYA' and yearID=1927&quot;
@@ -156,7 +160,12 @@ sqldf(query)</code></pre>
 ## 23 shockur01   1927    NYA  0
 ## 24 thomamy01   1927    NYA  0
 ## 25  weraju01   1927    NYA  1</code></pre>
-<hr />
+</div>
+</div>
+<div id="section-1" class="section level1">
+<h1>___________________________________________________________________________________</h1>
+<div id="example-2" class="section level4">
+<h4>Example 2</h4>
 <p>Now, we can list all players from Yankees that have scored at least 40 homeruns:</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR FROM Batting WHERE teamID='NYA' and HR&gt;=40&quot;
 sqldf(query)</code></pre>
@@ -191,7 +200,12 @@ sqldf(query)</code></pre>
 ## 28 rodrial01    NYA   2007 54
 ## 29 grandcu01    NYA   2011 41
 ## 30 grandcu01    NYA   2012 43</code></pre>
-<hr />
+</div>
+</div>
+<div id="section-2" class="section level1">
+<h1>___________________________________________________________________________________</h1>
+<div id="example-3" class="section level4">
+<h4>Example 3</h4>
 <p>We can also see those players who had 40 homeruns but didn’t have more than 60 strikeouts:</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR,SO FROM Batting WHERE HR&gt;40 and SO&lt;60&quot;
 sqldf(query)</code></pre>
@@ -224,7 +238,12 @@ sqldf(query)</code></pre>
 ## 26 bondsba01    SFN   2004 45 41
 ## 27 pujolal01    SLN   2004 46 52
 ## 28 pujolal01    SLN   2006 49 50</code></pre>
-<hr />
+</div>
+</div>
+<div id="section-3" class="section level1">
+<h1>___________________________________________________________________________________</h1>
+<div id="example-4" class="section level4">
+<h4>Example 4</h4>
 <p>Here is the information from 1970’s for Phillies for all players who had more than 30 homeruns:</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID, teamID,yearID,HR FROM Batting WHERE yearID&gt;=1970 and yearID&lt;1980 and HR&gt;30 and teamID='PHI'&quot;
 sqldf(query)</code></pre>
@@ -238,7 +257,14 @@ sqldf(query)</code></pre>
 ## 7 schmimi01    PHI   1977 38
 ## 8 luzingr01    PHI   1978 35
 ## 9 schmimi01    PHI   1979 45</code></pre>
-<hr />
+</div>
+</div>
+<div id="section-4" class="section level1">
+<h1>___________________________________________________________________________________</h1>
+<div id="order-by" class="section level3">
+<h3>Order By</h3>
+<div id="example-1-1" class="section level4">
+<h4>Example 1</h4>
 <p>We can also arrange them by descending number homeruns:</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,HR FROM Batting WHERE HR&gt;50
 ORDER BY HR DESC&quot;
@@ -280,7 +306,13 @@ sqldf(query)</code></pre>
 ## 34  mayswi01    NY1   1955 51
 ## 35 fieldce01    DET   1990 51
 ## 36 jonesan01    ATL   2005 51</code></pre>
-<hr />
+</div>
+</div>
+</div>
+<div id="section-5" class="section level1">
+<h1>___________________________________________________________________________________</h1>
+<div id="example-2-1" class="section level4">
+<h4>Example 2</h4>
 <p>This is the list of players that had at least 400 at bats but had less than 10 strikeouts and it is arranged by the least amount of strikeouts</p>
 <pre class="r"><code>query&lt;-&quot;SELECT playerID,teamID,yearID,SO,AB FROM Batting 
 WHERE SO&lt;10 and AB&gt;=400
@@ -352,7 +384,10 @@ sqldf(query)</code></pre>
 ## 63 holmeto01    BSN   1945  9 636
 ## 64 boudrlo01    CLE   1948  9 560
 ## 65 mitchda01    CLE   1952  9 511</code></pre>
-<hr />
+</div>
+</div>
+<div id="section-6" class="section level1">
+<h1>___________________________________________________________________________________</h1>
 </div>
 
 
