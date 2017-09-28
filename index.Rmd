@@ -94,3 +94,94 @@ sqldf(query)
 
 #___________________________________________________________________________________
 
+###Aggregation
+####Example 1
+Here we can see the players who had more than 600 homeruns:
+
+
+```{r}
+query<-"SELECT playerID,sum(HR) FROM Batting
+GROUP BY playerID
+HAVING sum(HR)>=600
+ ORDER BY sum(HR) DESC"
+sqldf(query)
+```
+
+#___________________________________________________________________________________
+
+####Example 2
+Here is the list of players that have avarage of more than 30 homeruns and order them by descending order:
+
+
+```{r}
+query<-"SELECT playerID,avg(HR) FROM Batting
+GROUP BY playerID
+HAVING avg(HR)>30
+ORDER BY avg(HR) DESC"
+sqldf(query)
+```
+
+#___________________________________________________________________________________
+
+###Joins
+###Example 1
+Here is an example of joining two tables:
+
+
+```{r}
+query<-"SELECT nameFirst,nameLast,teamID,yearID,HR 
+FROM Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID
+WHERE Batting.playerID='ruthba01'"
+sqldf(query)
+```
+
+#___________________________________________________________________________________
+
+###Example 2
+Here is an example how to order joined tables results from most to least homeruns:
+
+
+```{r}
+query<-"SELECT nameFirst,nameLast,teamID,yearID,HR 
+FROM Batting INNER JOIN Master
+ON Batting.playerID=Master.playerID
+WHERE HR>50
+ORDER BY HR DESC"
+
+sqldf(query)
+```
+
+#___________________________________________________________________________________
+
+###Example 3
+Here, we can see how to join with table "teams":
+
+
+```{r}
+query<-"SELECT playerID,name,Batting.yearID,Batting.HR 
+From Batting INNER JOIN Teams
+ON Batting.teamID=Teams.teamID AND Batting.yearID=Teams.yearID
+WHERE playerID='ruthba01'"
+
+
+sqldf(query)
+```
+
+#___________________________________________________________________________________
+
+###Example 4
+Here is a list of all players who had more than 1 milion dollars average salary and have a first name Bob:
+
+```{r}
+query<-"SELECT Master.playerID,nameFirst,nameLast,yearID,avg(salary)
+FROM Master INNER JOIN Salaries
+on Master.playerID=salaries.playerID
+GROUP BY Master.playerID
+Having avg(salary)>=1000000 and nameFirst='Bob'
+ORDER BY avg(salary) DESC"
+
+sqldf(query)
+```
+
+#___________________________________________________________________________________
